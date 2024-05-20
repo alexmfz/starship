@@ -1,0 +1,14 @@
+Credentials for swagger (ADMIN // ADMIN)
+TechnicalDetails:
+    - Services:
+        - Get all starships ("/getStarships") > GET (with the optional use of pagination)
+        - Get starship by id inserted by parameter ("/getStarshipById?Id=Input") > GET
+        - Get starship by name inserter by parameter ("/getStarshipByName?name=Input") > GET
+        - Create new startship ("/createStarship") > POST
+        - Modify starship (will be by name) ("/modifyStarship?name=Input") > PUT
+        - Delete starship (will be by name) ("deleteStarship?name=Input)" > DELETE
+    - Security > JWT token (bearer)
+    - H2 database
+    - Use of swagger for doc
+    - User of @Aspect in the controller when an Id requested is negative
+    - Generic exception to control possible errors no controlled

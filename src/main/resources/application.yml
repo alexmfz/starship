@@ -1,0 +1,17 @@
+server:
+    port: 9000
+    servlet:
+        context-path: /spacecrafts
+spring:
+    application:
+        name: TEST
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+    datasource:
+        url: jdbc:h2:mem:starshipDB
+        driverClassName: org.h2.Driver
+        username: admin
+        password: admin
+

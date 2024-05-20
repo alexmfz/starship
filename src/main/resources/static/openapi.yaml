@@ -1,0 +1,183 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI startship definition
+  version: v0
+servers:
+  - url: http://localhost:9000/spacecrafts
+    description: Generated server url
+paths:
+  /modifyStarshipByName:
+    put:
+      tags:
+        - Starship Controllers
+      operationId: modifyStarshipByName
+      parameters:
+        - name: Name
+          description: Name of the starship to modify
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: Weapon
+          description: Name of the weapon to set
+          in: query
+          required: true
+          schema:
+            type: string
+      description: Modify a starship by his name changing the weapon
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /createStarship:
+    post:
+      tags:
+        - Starship Controllers
+      operationId: createStarship
+      description: Creating a starship to add into the BBDD H2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Starship'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /getStarships:
+    get:
+      tags:
+        - Starship Controllers
+      description: Get all starships
+      operationId: getStarships
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Starship'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /getStarshipByName:
+    get:
+      tags:
+        - Starship Controllers
+      operationId: getStarshipsByName
+      description: Get all starships which contains name
+      parameters:
+        - name: Name
+          in: query
+          required: true
+          description: Pattern of the name to look for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Starship'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /getStarshipById:
+    get:
+      tags:
+        - Starship Controllers
+      operationId: getStarshipsById
+      description: Get starship by his ID
+      parameters:
+        - name: Id
+          in: query
+          required: true
+          description: Id to look for
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Starship'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /deleteStarshipByName:
+    delete:
+      tags:
+        - Starship Controllers
+      operationId: deleteStarshipByName
+      description: Delete a starship by his name
+      parameters:
+        - name: Name
+          description: Name of the starship to delete
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+components:
+  schemas:
+    Starship:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The ID of the starship from 1 to N
+          example: 1
+        name:
+          type: string
+          description: The name of the starship
+          example: Halcón Milenario
+        weapons:
+          type: string
+          description: The weapons equipped on the starship
+          example: Blaster
